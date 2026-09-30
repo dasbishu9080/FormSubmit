@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Submit Your Interest</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #f8faff);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 15px;
+            color: #1f2937;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.10);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        h1 {
+            font-size: 25px;
+            line-height: 1.35;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label.main-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .optional {
+            font-size: 12px;
+            font-weight: normal;
+            color: #9ca3af;
+        }
+
+        input[type="text"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+            background: #fff;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        .topics {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .topic-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fafafa;
+        }
+
+        .topic-option:hover {
+            border-color: #93c5fd;
+            background: #f8fbff;
+        }
+
+        .topic-option input[type="radio"] {
+            margin-top: 3px;
+            width: 17px;
+            height: 17px;
+            accent-color: #2563eb;
+            flex-shrink: 0;
+        }
+
+        .topic-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #374151;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 5px;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .success-section {
+            display: none;
+            text-align: center;
+            padding: 35px 10px;
+        }
+
+        .success-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .success-section h2 {
+            font-size: 23px;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .success-section p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .error-message {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: 600px) {
+
+            .card {
+                padding: 25px 18px;
+                border-radius: 14px;
+            }
+
+            h1 {
+                font-size: 21px;
+            }
+
+            .topic-option {
+                padding: 12px;
+            }
+
+            .topic-text {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <!-- FORM -->
+        <div id="formSection">
+
+            <div class="header">
+
+                <div class="header-icon">✓</div>
+
+                <h1>
+                    Submit your interest on Secondary Topic
+                </h1>
+
+                <p class="subtitle">
+                    Please fill in the details below and select one
+                    topic you are interested in.
+                </p>
+
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+
+            <!--
+                FORM SUBMIT
+                Replace YOUR_EMAIL@example.com
+                with your actual email address.
+            -->
+
+            <form
+                id="interestForm"
+                action="https://formsubmit.co/minilaskar590@gmail.com"
+                method="POST"
+            >
+
+                <!-- Email subject -->
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="New Secondary Topic Interest Submission"
+                >
+
+                <!-- Disable FormSubmit captcha -->
+                <input
+                    type="hidden"
+                    name="_captcha"
+                    value="false"
+                >
+
+                <!-- Send user to our success page -->
+                <input
+                    type="hidden"
+                    name="_next"
+                    value="/success.html"
+                >
+
+                <!-- Name -->
+                <div class="form-group">
+
+                    <label class="main-label">
+                        Name <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="Name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Roll Number -->
+                <div class="form-group">
+
+                    <label class="main-label">
+                        Roll Number
+                        <span class="optional">(Optional)</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="Roll Number"
+                        placeholder="Enter your roll number"
+                    >
+
+                </div>
+
+
+                <!-- Mobile -->
+                <div class="form-group">
+
+                    <label class="main-label">
+                        Mobile Number <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="Mobile Number"
+                        placeholder="Enter 10-digit mobile number"
+                        maxlength="10"
+                        inputmode="numeric"
+                        pattern="[0-9]{10}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Topics -->
+                <div class="form-group">
+
+                    <label class="main-label">
+                        Select Topic <span class="required">*</span>
+                    </label>
+
+                    <div class="topics">
+
+                        <label class="topic-option">
+                            <input
+                                type="radio"
+                                name="Selected Topic"
+                                value="1. Development of charts related to language learning"
+                                required
+                            >
+
+                            <span class="topic-text">
+                                1. Development of charts related to language learning
+                            </span>
+                        </label>
+
+
+                        <label class="topic-option">
+                            <input
+                                type="radio"
+                                name="Selected Topic"
+                                value="2. Project work on multilingualism, home language and other languages in the neighborhood."
+                            >
+
+                            <span class="topic-text">
+                                2. Project work on multilingualism, home language and other languages in the neighborhood.
+                            </span>
+                        </label>
+
+
+                        <label class="topic-option">
+                            <input
+                                type="radio"
+                                name="Selected Topic"
+                                value="3. Collection of folk tales, stories, folk songs, etc. and sharing in the class."
+                            >
+
+                            <span class="topic-text">
+                                3. Collection of folk tales, stories, folk songs, etc. and sharing in the class.
+                            </span>
+                        </label>
+
+
+                        <label class="topic-option">
+                            <input
+                                type="radio"
+                                name="Selected Topic"
+                                value="4. Writing essays and articles on language related issues"
+                            >
+
+                            <span class="topic-text">
+                                4. Writing essays and articles on language related issues
+                            </span>
+                        </label>
+
+
+                        <label class="topic-option">
+                            <input
+                                type="radio"
+                                name="Selected Topic"
+                                value="5. A case study on multilingual classroom"
+                            >
+
+                            <span class="topic-text">
+                                5. A case study on multilingual classroom
+                            </span>
+                        </label>
+
+
+                        <label class="topic-option">
+                            <input
+                                type="radio"
+                                name="Selected Topic"
+                                value="6. Critical analysis of texts – newspaper, children literature, journal, textbooks, etc."
+                            >
+
+                            <span class="topic-text">
+                                6. Critical analysis of texts – newspaper, children literature, journal, textbooks, etc.
+                            </span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Submit -->
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Submit Interest
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- SUCCESS MESSAGE -->
+        <div
+            id="successSection"
+            class="success-section"
+        >
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Thanks for submitting your interest
+            </h2>
+
+            <p>
+                Your response has been successfully submitted.
+                Thank you for sharing your interest.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const form = document.getElementById("interestForm");
+
+    const formSection =
+        document.getElementById("formSection");
+
+    const successSection =
+        document.getElementById("successSection");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+
+    /*
+     * This only shows the success message
+     * if FormSubmit accepts the submission.
+     *
+     * FormSubmit normally redirects the browser
+     * after successful submission.
+     */
+
+    form.addEventListener("submit", function () {
+
+        const mobile =
+            form.querySelector(
+                'input[name="Mobile Number"]'
+            ).value.trim();
+
+        if (!/^[0-9]{10}$/.test(mobile)) {
+
+            event.preventDefault();
+
+            errorMessage.textContent =
+                "Please enter a valid 10-digit mobile number.";
+
+            errorMessage.style.display = "block";
+
+            return;
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+</html>
